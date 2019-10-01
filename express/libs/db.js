@@ -8,7 +8,6 @@ const connection = mysql.createConnection({
 
 function queryAsync(query, params) {
   return new Promise((resolve, reject) => {
-    connection.connect();
     fmtQuery = mysql.format(query, params);
     connection.query(fmtQuery, function (err, rows) {
       if (err) {
@@ -16,7 +15,6 @@ function queryAsync(query, params) {
       }
       return resolve(rows);
     });
-    connection.end();
   });
 }
 
