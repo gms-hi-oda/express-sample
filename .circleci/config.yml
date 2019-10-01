@@ -1,0 +1,19 @@
+ version: 2
+ jobs:
+   build:
+     working_directory: ~/express-sample
+     docker:
+       - image: circleci/node:10
+     steps:
+       - checkout
+       - persist_to_workspace:
+           root: ~/express-sample
+           paths:
+             - ./*
+       - attach_workspace:
+           at: ~/express-sample
+       - run:
+           working_directory: "~/express-sample/express"
+           command: |
+             npm install
+             npm run test
